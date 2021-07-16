@@ -20,7 +20,7 @@ namespace VeeamTaskKiller
             KillTime = int.Parse(killT) * 60000;
             CheckTime = int.Parse(checkT) * 60000;
             killTimer = new(KillProcess, null, 0, CheckTime);
-            HoldOn();
+            Awaiting();
         }
         public void KillProcess(object state)
         {
@@ -29,7 +29,7 @@ namespace VeeamTaskKiller
             {
                 foreach (var i in curProcess)
                 {
-                    Console.WriteLine($"Process: {i.ProcessName}({i.Id})\nStartup: {i.StartTime}\nLifetime: {DateTime.Now.Subtract(i.StartTime).ToString(@"hh\:mm\:ss")}\n");
+                    Console.WriteLine($"Process: {i.ProcessName}(id: {i.Id})\nStartup: {i.StartTime}\nLifetime: {DateTime.Now.Subtract(i.StartTime).ToString(@"hh\:mm\:ss")}\n");
                     if ((DateTime.Now.Subtract(i.StartTime)).TotalMilliseconds > KillTime)
                     {
                         i.Kill();
@@ -41,10 +41,9 @@ namespace VeeamTaskKiller
                     }
                 }
             }
-            else
-                Console.WriteLine($"{ProcessName} not found");
+            else Console.WriteLine($"{ProcessName} not found");
         }
-        public void HoldOn()
+        public void Awaiting()
         {
             Console.ReadLine();
         }
