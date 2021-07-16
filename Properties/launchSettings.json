@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "VeeamTaskKiller": {
+      "commandName": "Project",
+      "commandLineArgs": "notepad++.exe  5 1"
+    }
+  }
+}
